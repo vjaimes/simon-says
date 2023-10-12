@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  background-color: rgb(34, 34, 34);
+}
+
+.counter {
+  font-size: calc(70rem / 16);
+  color: white;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: fit-content;
+  height: fit-content;
+  gap: 20px;
+}
+
+.square-size {
+  width: 200px;
+  height: 200px;
+  transition: all 0.3s;
+}
+
+.red {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.red:active {
+  background-color: rgb(255, 0, 0);
+}
+
+.red:hover {
+  transform: scale(1.1);
+}
+
+.blue {
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+.blue:active {
+  background-color: rgb(0, 0, 255);
+}
+
+.blue:hover {
+  transform: scale(1.1);
+}
+
+.green {
+  background-color: rgba(0, 128, 0, 0.5);
+}
+
+.green:active {
+  background-color: rgb(0, 128, 0);
+}
+
+.green:hover {
+  transform: scale(1.1);
+}
+
+.yellow {
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+.yellow:active {
+  background-color: rgb(255, 255, 0);
+}
+
+.yellow:hover {
+  transform: scale(1.1);
+}
