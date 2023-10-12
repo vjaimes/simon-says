@@ -4,7 +4,7 @@ let counterStart = 3;
 
 const counter = document.querySelector(".counter");
 
-counter.textContent = counterStart;
+// counter.textContent = counterStart;
 
 // game start count down
 const reduceCounter = function () {
@@ -22,7 +22,7 @@ const reduceCounter = function () {
 const selectColor = function (target) {
   setInterval(() => {
     target.style.backgroundColor = "white";
-  }, 500);
+  });
 };
 
 document.addEventListener("click", function (e) {
