@@ -22,16 +22,33 @@ const reduceCounter = function () {
 const selectColor = function (target) {
   const data = target.dataset.order;
 
-  switch (data) {
-    case data === 1:
-      console.log(data);
+  switch (+data) {
+    case 1:
       target.style.backgroundColor = "rgb(255, 0, 0)";
       setInterval(() => {
         target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
       }, 250);
       break;
+    case 2:
+      target.style.backgroundColor = "rgb(0, 0, 255)";
+      setInterval(() => {
+        target.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
+      }, 250);
+      break;
+    case 3:
+      target.style.backgroundColor = "rgb(0, 128, 0)";
+      setInterval(() => {
+        target.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
+      }, 250);
+      break;
+    case 4:
+      target.style.backgroundColor = "rgb(255, 255, 0)";
+      setInterval(() => {
+        target.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
+      }, 250);
+      break;
     default:
-      console.log("done");
+      return;
   }
 };
 
