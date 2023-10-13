@@ -20,14 +20,23 @@ const reduceCounter = function () {
 };
 
 const selectColor = function (target) {
-  setInterval(() => {
-    target.style.backgroundColor = "white";
-  });
+  const data = target.dataset.order;
+
+  switch (data) {
+    case data === 1:
+      console.log(data);
+      target.style.backgroundColor = "rgb(255, 0, 0)";
+      setInterval(() => {
+        target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+      }, 250);
+      break;
+    default:
+      console.log("done");
+  }
 };
 
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
-  console.log(e.target.dataset.order);
   selectColor(e.target);
 });
 
