@@ -35,9 +35,9 @@ body {
   background-color: rgba(255, 0, 0, 0.5);
 }
 
-/* .red:active {
+.red:active {
   background-color: rgb(255, 0, 0);
-} */
+}
 
 .red:hover {
   transform: scale(1.1);
