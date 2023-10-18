@@ -30,7 +30,7 @@ const RNG = function (max) {
 };
 
 const highlightTiming = {
-  duration: 2000,
+  duration: 250,
   iterations: 1,
 };
 
@@ -43,24 +43,32 @@ const highlightColor = function (target) {
         { backgroundColor: "rgb(255, 0, 0)" },
         { backgroundColor: "rgba(255, 0, 0, 0.5)" },
       ];
+
+      target.animate(highlightSquareRed, highlightTiming);
       break;
     case 2:
       const highlightSquareBlue = [
         { backgroundColor: "rgb(0, 0, 255)" },
         { backgroundColor: "rgba(0, 0, 255, 0.5)" },
       ];
+
+      target.animate(highlightSquareBlue, highlightTiming);
       break;
     case 3:
       const highlightSquareGreen = [
         { backgroundColor: "rgb(0, 128, 0)" },
         { backgroundColor: "rgba(0, 128, 0, 0.5)" },
       ];
+
+      target.animate(highlightSquareGreen, highlightTiming);
       break;
     case 4:
       const highlightSquareYellow = [
         { backgroundColor: "rgb(255, 255, 0)" },
         { backgroundColor: "rgba(255, 255, 0, 0.5)" },
       ];
+
+      target.animate(highlightSquareYellow, highlightTiming);
       break;
     default:
       return;
@@ -105,9 +113,7 @@ const highlightColor = function (target) {
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
   // highlightColor(e.target);
-  e.target.animate(() => {
-    highlightColor(e.target);
-  }, highlightTiming);
+  highlightColor(e.target);
 });
 
 // reduceCounter();
