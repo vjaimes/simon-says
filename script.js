@@ -1,6 +1,7 @@
 "use strict";
 //global vars
 let counterStart = 3;
+const simonsColors = [];
 
 const counter = document.querySelector(".counter");
 
@@ -19,7 +20,16 @@ const reduceCounter = function () {
   }, 1000);
 };
 
-const selectColor = function (target) {
+// random number generator for simon's color selections
+const RNG = function (max) {
+  for (let i = 0; i < max; i++) {
+    const randomNum = Math.floor(Math.random() * max);
+    simonsColors.push(randomNum + 1);
+  }
+  console.log(simonsColors);
+};
+
+const highlightColor = function (target) {
   const data = target.dataset.order;
 
   switch (+data) {
@@ -54,7 +64,7 @@ const selectColor = function (target) {
 
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
-  selectColor(e.target);
+  highlightColor(e.target);
 });
 
 // reduceCounter();
