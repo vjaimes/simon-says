@@ -29,42 +29,85 @@ const RNG = function (max) {
   console.log(simonsColors);
 };
 
+const highlightTiming = {
+  duration: 2000,
+  iterations: 1,
+};
+
 const highlightColor = function (target) {
   const data = target.dataset.order;
 
   switch (+data) {
     case 1:
-      target.style.backgroundColor = "rgb(255, 0, 0)";
-      setInterval(() => {
-        target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-      }, 250);
+      const highlightSquareRed = [
+        { backgroundColor: "rgb(255, 0, 0)" },
+        { backgroundColor: "rgba(255, 0, 0, 0.5)" },
+      ];
       break;
     case 2:
-      target.style.backgroundColor = "rgb(0, 0, 255)";
-      setInterval(() => {
-        target.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
-      }, 250);
+      const highlightSquareBlue = [
+        { backgroundColor: "rgb(0, 0, 255)" },
+        { backgroundColor: "rgba(0, 0, 255, 0.5)" },
+      ];
       break;
     case 3:
-      target.style.backgroundColor = "rgb(0, 128, 0)";
-      setInterval(() => {
-        target.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
-      }, 250);
+      const highlightSquareGreen = [
+        { backgroundColor: "rgb(0, 128, 0)" },
+        { backgroundColor: "rgba(0, 128, 0, 0.5)" },
+      ];
       break;
     case 4:
-      target.style.backgroundColor = "rgb(255, 255, 0)";
-      setInterval(() => {
-        target.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
-      }, 250);
+      const highlightSquareYellow = [
+        { backgroundColor: "rgb(255, 255, 0)" },
+        { backgroundColor: "rgba(255, 255, 0, 0.5)" },
+      ];
       break;
     default:
       return;
   }
 };
 
+// Highlights the colors simon selects.
+// const highlightColor = function (target) {
+//   const data = target.dataset.order;
+
+//   switch (+data) {
+//     case 1:
+//       target.style.backgroundColor = "rgb(255, 0, 0)";
+//       setInterval(() => {
+//         target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+//       }, 250);
+//       break;
+//     case 2:
+//       target.style.backgroundColor = "rgb(0, 0, 255)";
+//       setInterval(() => {
+//         target.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
+//       }, 250);
+//       break;
+//     case 3:
+//       target.style.backgroundColor = "rgb(0, 128, 0)";
+//       setInterval(() => {
+//         target.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
+//       }, 250);
+//       break;
+//     case 4:
+//       target.style.backgroundColor = "rgb(255, 255, 0)";
+//       setInterval(() => {
+//         target.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
+//       }, 250);
+//       break;
+//     default:
+//       return;
+//   }
+// };
+
+// event listener for when clicking on a colored square
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
-  highlightColor(e.target);
+  // highlightColor(e.target);
+  e.target.animate(() => {
+    highlightColor(e.target);
+  }, highlightTiming);
 });
 
 // reduceCounter();
