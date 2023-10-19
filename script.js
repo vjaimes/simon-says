@@ -1,10 +1,11 @@
 "use strict";
 //global vars
 let counterStart = 3;
-const simonsColors = [];
+const simonsSelections = [];
 
 const counter = document.querySelector(".counter");
-
+const simonsSquares = Array.from(document.querySelectorAll(".square-size"));
+// console.log(simonsSquares);
 // counter.textContent = counterStart;
 
 // game start count down
@@ -24,9 +25,18 @@ const reduceCounter = function () {
 const RNG = function (max) {
   for (let i = 0; i < max; i++) {
     const randomNum = Math.floor(Math.random() * max);
-    simonsColors.push(randomNum + 1);
+    simonsSelections.push(randomNum + 1);
   }
-  console.log(simonsColors);
+  console.log(simonsSelections);
+};
+
+// highlight selected colors
+const simonSays = function (simonsSelections) {
+  simonsSelections.forEach((index) => {
+    highlightColor(
+      simonsSquares.find((square) => +square.dataset.order === index)
+    );
+  });
 };
 
 const highlightTiming = {
@@ -35,6 +45,7 @@ const highlightTiming = {
 };
 
 const highlightColor = function (target) {
+  console.log(target);
   const data = target.dataset.order;
 
   switch (+data) {
@@ -75,6 +86,7 @@ const highlightColor = function (target) {
   }
 };
 
+// old color selector for simon
 // Highlights the colors simon selects.
 // const highlightColor = function (target) {
 //   const data = target.dataset.order;
@@ -113,7 +125,12 @@ const highlightColor = function (target) {
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
   // highlightColor(e.target);
-  highlightColor(e.target);
+  // highlightColor(e.target);
 });
 
-// reduceCounter();
+const init = function () {
+  RNG(4);
+  simonSays(simonsSelections);
+};
+
+init();
