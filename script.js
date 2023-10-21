@@ -32,11 +32,13 @@ const RNG = function (max) {
 
 // highlight selected colors
 const simonSays = function (simonsSelections) {
-  simonsSelections.forEach((index) => {
-    highlightColor(
-      simonsSquares.find((square) => +square.dataset.order === index)
-    );
-  });
+  setInterval(() => {
+    simonsSelections.forEach((index) => {
+      highlightColor(
+        simonsSquares.find((square) => +square.dataset.order === index)
+      );
+    });
+  }, 2000);
 };
 
 const highlightTiming = {
