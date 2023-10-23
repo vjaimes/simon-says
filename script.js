@@ -30,15 +30,29 @@ const RNG = function (max) {
   console.log(simonsSelections);
 };
 
-// highlight selected colors
+// display selected colors
 const simonSays = function (simonsSelections) {
-  setInterval(() => {
-    simonsSelections.forEach((index) => {
-      highlightColor(
-        simonsSquares.find((square) => +square.dataset.order === index)
-      );
-    });
-  }, 2000);
+  let selectionCounter = simonsSelections.length;
+  let currSquare = 0;
+
+  const timer = setInterval(() => {
+    const selection = simonsSquares.find(
+      (square) => +square.dataset.order === simonsSelections[currSquare]
+    );
+
+    highlightColor(selection);
+
+    currSquare++;
+    selectionCounter--;
+    console.log("counter: ", selectionCounter);
+    console.log("index: ", currSquare);
+    console.log(simonsSelections);
+
+    if (selectionCounter < 1) {
+      clearInterval(timer);
+      console.log("cleard");
+    }
+  }, 1000);
 };
 
 const highlightTiming = {
