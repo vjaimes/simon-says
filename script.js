@@ -1,14 +1,19 @@
 "use strict";
 //global vars
+const gameStart = false;
 let counterStart = 3;
+const playerSelections = [];
 const simonsSelections = [];
 
 const counter = document.querySelector(".counter");
 const simonsSquares = Array.from(document.querySelectorAll(".square-size"));
 const playBtn = document.querySelector(".play-btn");
+const overlay = document.querySelector(".overlay");
+overlay.style.display = "none";
 
 // game start count down
 const gameCountdownStart = function () {
+  overlay.style.display = "block";
   counter.style.display = "block";
   counter.textContent = counterStart;
 
@@ -19,10 +24,9 @@ const gameCountdownStart = function () {
     if (counterStart < 1) {
       clearInterval(startTimer);
       counter.style.display = "none";
+      simonSays(simonsSelections);
     }
   }, 1000);
-
-  simonSays(simonsSelections);
 };
 
 // random number generator for simon's color selections
@@ -55,6 +59,9 @@ const simonSays = function (simonsSelections) {
     if (selectionCounter < 1) {
       clearInterval(timer);
       console.log("cleard");
+      setTimeout(() => {
+        overlay.style.display = "none";
+      }, 1000);
     }
   }, 1000);
 };
@@ -151,6 +158,8 @@ const startGame = function () {
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
   highlightColor(e.target);
+  playerSelections.push(e.target);
+  console.log(playerSelections);
 });
 
 const init = function () {
