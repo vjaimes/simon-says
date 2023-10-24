@@ -5,20 +5,24 @@ const simonsSelections = [];
 
 const counter = document.querySelector(".counter");
 const simonsSquares = Array.from(document.querySelectorAll(".square-size"));
-// console.log(simonsSquares);
-// counter.textContent = counterStart;
+const playBtn = document.querySelector(".play-btn");
 
 // game start count down
-const reduceCounter = function () {
-  setInterval(function () {
+const gameCountdownStart = function () {
+  counter.style.display = "block";
+  counter.textContent = counterStart;
+
+  const startTimer = setInterval(function () {
     counterStart--;
     counter.textContent = counterStart;
 
     if (counterStart < 1) {
-      clearInterval(reduceCounter);
+      clearInterval(startTimer);
       counter.style.display = "none";
     }
   }, 1000);
+
+  simonSays(simonsSelections);
 };
 
 // random number generator for simon's color selections
@@ -55,13 +59,14 @@ const simonSays = function (simonsSelections) {
   }, 1000);
 };
 
+// timer for square highlight animation
 const highlightTiming = {
-  duration: 250,
+  duration: 750,
   iterations: 1,
 };
 
+// function that highlights square based on simons squares
 const highlightColor = function (target) {
-  console.log(target);
   const data = target.dataset.order;
 
   switch (+data) {
@@ -137,16 +142,19 @@ const highlightColor = function (target) {
 //   }
 // };
 
+const startGame = function () {
+  RNG(4);
+  gameCountdownStart();
+};
+
 // event listener for when clicking on a colored square
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
-  // highlightColor(e.target);
-  // highlightColor(e.target);
+  highlightColor(e.target);
 });
 
 const init = function () {
-  RNG(4);
-  simonSays(simonsSelections);
+  playBtn.addEventListener("click", startGame);
 };
 
 init();
