@@ -3,13 +3,13 @@
 const gameStart = false;
 let counterStart = 3;
 const playerSelections = [];
-const simonsSelections = [];
+let simonsSelections = [];
 
 const counter = document.querySelector(".counter");
 const simonsSquares = Array.from(document.querySelectorAll(".square-size"));
 const playBtn = document.querySelector(".play-btn");
 const overlay = document.querySelector(".overlay");
-overlay.style.display = "none";
+const gameOverScreen = document.querySelector(".overlay-gameOver");
 
 // game start count down
 const gameCountdownStart = function () {
@@ -43,6 +43,7 @@ const simonSays = function (simonsSelections) {
   let selectionCounter = simonsSelections.length;
   let currSquare = 0;
 
+  playBtn.style.display = "none";
   const timer = setInterval(() => {
     const selection = simonsSquares.find(
       (square) => +square.dataset.order === simonsSelections[currSquare]
@@ -154,12 +155,24 @@ const startGame = function () {
   gameCountdownStart();
 };
 
+const gameOver = function () {
+  gameOverScreen.style.display = "block";
+  simonsSelections = [];
+};
+
+//keeps track of current players & simons selection
+let colorIndex = 0;
 // event listener for when clicking on a colored square
 document.addEventListener("click", function (e) {
   if (!e.target.classList.contains("square-size")) return;
   highlightColor(e.target);
-  playerSelections.push(e.target);
-  console.log(playerSelections);
+  // playerSelections.push(e.target);
+
+  if (+e.target.dataset.order === +simonsSelections[colorIndex]) {
+    colorIndex++;
+  } else {
+    gameOver();
+  }
 });
 
 const init = function () {
