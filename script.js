@@ -1,14 +1,14 @@
 "use strict";
 //global vars
-const gameStart = false;
-let counterStart = 3;
-let simonsSelections = [];
-
 const counter = document.querySelector(".counter");
 const squares = Array.from(document.querySelectorAll(".square-size"));
 const playBtn = document.querySelector(".play-btn");
 const overlay = document.querySelector(".overlay");
 const gameOverScreen = document.querySelector(".overlay-gameOver");
+
+let gameStart = false;
+let counterStart = 3;
+let simonsSelections = [];
 
 // game start count down
 const gameCountdownStart = function () {
@@ -39,7 +39,9 @@ const RNG = function (max) {
 
 // display selected colors
 const simonSays = function (simonsSelections) {
+  //how we know that there are no more squares left for simon to select
   let selectionCounter = simonsSelections.length;
+  //keeps track of which square to highlight next
   let currSquare = 0;
 
   playBtn.style.display = "none";
@@ -58,7 +60,6 @@ const simonSays = function (simonsSelections) {
 
     if (selectionCounter < 1) {
       clearInterval(timer);
-      console.log("cleard");
       setTimeout(() => {
         overlay.style.display = "none";
       }, 1000);
@@ -159,9 +160,17 @@ const gameOver = function () {
   if (!gameStart) return;
   gameOverScreen.style.display = "block";
   simonsSelections = [];
+  gameStart = false;
 };
 
-//keeps track of current players & simons selection
+const gameWon = function () {
+  if (!gameStart) return;
+  gameStart = false;
+  console.log("won");
+  // turn on game won protocol
+};
+
+//compares player selection against simons selections
 let colorIndex = 0;
 // event listener for when clicking on a colored square
 document.addEventListener("click", function (e) {
@@ -169,8 +178,15 @@ document.addEventListener("click", function (e) {
   highlightColor(e.target);
 
   if (+e.target.dataset.order === +simonsSelections[colorIndex]) {
+    if (colorIndex >= simonsSelections.length) {
+      console.log("game won");
+      gameWon();
+    }
     colorIndex++;
+    console.log("color index: ", colorIndex, simonsSelections.length);
   } else {
+    console.log("game over");
+    console.log("color index: ", colorIndex, simonsSelections.length);
     gameOver();
   }
 });
