@@ -4,11 +4,17 @@ const counter = document.querySelector(".counter");
 const squares = Array.from(document.querySelectorAll(".square-size"));
 const playBtn = document.querySelector(".play-btn");
 const overlay = document.querySelector(".overlay");
-const gameOverScreen = document.querySelector(".overlay-gameOver");
 
 let gameStart = false;
 let counterStart = 3;
 let simonsSelections = [];
+
+const overlayEditor = function (message) {
+  const text = `<p>${message}</p>`;
+  overlay.style.display = "grid";
+  overlay.classList.add("overlay-game--msg");
+  overlay.insertAdjacentHTML("beforeend", text);
+};
 
 // game start count down
 const gameCountdownStart = function () {
@@ -158,16 +164,15 @@ const startGame = function () {
 
 const gameOver = function () {
   if (!gameStart) return;
-  gameOverScreen.style.display = "block";
-  simonsSelections = [];
   gameStart = false;
+  document.onmousedown = dis;
+  overlayEditor("Game Over!!!");
 };
 
 const gameWon = function () {
   if (!gameStart) return;
   gameStart = false;
-  console.log("won");
-  // turn on game won protocol
+  overlayEditor("You Win!!!");
 };
 
 //compares player selection against simons selections
@@ -178,15 +183,11 @@ document.addEventListener("click", function (e) {
   highlightColor(e.target);
 
   if (+e.target.dataset.order === +simonsSelections[colorIndex]) {
-    if (colorIndex >= simonsSelections.length) {
-      console.log("game won");
+    colorIndex++;
+    if (colorIndex === simonsSelections.length) {
       gameWon();
     }
-    colorIndex++;
-    console.log("color index: ", colorIndex, simonsSelections.length);
   } else {
-    console.log("game over");
-    console.log("color index: ", colorIndex, simonsSelections.length);
     gameOver();
   }
 });

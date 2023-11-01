@@ -9,6 +9,7 @@ body {
   place-content: center;
   height: 100vh;
   background-color: rgb(34, 34, 34);
+  position: relative;
 }
 
 .counter {
@@ -24,17 +25,13 @@ body {
   position: fixed;
   right: 0;
   top: 0;
+  place-items: center;
 }
 
-.overlay-gameOver {
-  display: none;
-  content: "Game Over";
+.overlay.overlay-game--msg {
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
+  font-size: calc(48rem / 16);
 }
 
 .container {
