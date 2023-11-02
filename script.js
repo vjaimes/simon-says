@@ -40,7 +40,6 @@ const RNG = function (max) {
     const randomNum = Math.floor(Math.random() * max);
     simonsSelections.push(randomNum + 1);
   }
-  console.log(simonsSelections);
 };
 
 // display selected colors
@@ -60,9 +59,6 @@ const simonSays = function (simonsSelections) {
 
     currSquare++;
     selectionCounter--;
-    console.log("counter: ", selectionCounter);
-    console.log("index: ", currSquare);
-    console.log(simonsSelections);
 
     if (selectionCounter < 1) {
       clearInterval(timer);
@@ -121,41 +117,6 @@ const highlightColor = function (target) {
   }
 };
 
-// old color selector for simon
-// Highlights the colors simon selects.
-// const highlightColor = function (target) {
-//   const data = target.dataset.order;
-
-//   switch (+data) {
-//     case 1:
-//       target.style.backgroundColor = "rgb(255, 0, 0)";
-//       setInterval(() => {
-//         target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-//       }, 250);
-//       break;
-//     case 2:
-//       target.style.backgroundColor = "rgb(0, 0, 255)";
-//       setInterval(() => {
-//         target.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
-//       }, 250);
-//       break;
-//     case 3:
-//       target.style.backgroundColor = "rgb(0, 128, 0)";
-//       setInterval(() => {
-//         target.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
-//       }, 250);
-//       break;
-//     case 4:
-//       target.style.backgroundColor = "rgb(255, 255, 0)";
-//       setInterval(() => {
-//         target.style.backgroundColor = "rgba(255, 255, 0, 0.5)";
-//       }, 250);
-//       break;
-//     default:
-//       return;
-//   }
-// };
-
 const startGame = function () {
   gameStart = true;
   RNG(4);
@@ -165,14 +126,15 @@ const startGame = function () {
 const gameOver = function () {
   if (!gameStart) return;
   gameStart = false;
-  document.onmousedown = dis;
   overlayEditor("Game Over!!!");
+  squares.forEach((s) => (s.style.pointerEvents = "none"));
 };
 
 const gameWon = function () {
   if (!gameStart) return;
   gameStart = false;
   overlayEditor("You Win!!!");
+  squares.forEach((s) => (s.style.pointerEvents = "none"));
 };
 
 //compares player selection against simons selections
