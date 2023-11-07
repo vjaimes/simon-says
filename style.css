@@ -41,12 +41,13 @@ body {
   width: 100vw;
   display: block;
   position: absolute;
+  transition: transform 1s;
 }
 
 .overlay-timer:nth-child(1) {
   /* width: 100vw; */
   transform: translateX(0);
-  background-color: bisque;
+  background-color: rgb(255, 228, 196);
 }
 
 .overlay-timer:nth-child(2) {

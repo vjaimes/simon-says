@@ -2,7 +2,7 @@
 //global vars
 const counter = document.querySelector(".counter");
 const squares = Array.from(document.querySelectorAll(".square-size"));
-const overlayTimer = document.querySelectorAll(".overlay-timer");
+const overlayTimers = document.querySelectorAll(".overlay-timer");
 const playBtn = document.querySelector(".play-btn");
 const overlay = document.querySelector(".overlay");
 
@@ -24,13 +24,17 @@ const gameCountdownStart = function () {
   const text = ``;
   counter.textContent = counterStart;
 
-  for (let count = 0; count < counterStart; count++) {
-    overlay.insertAdjacentHTML(`<div>${counterStart}</div>`);
-  }
+  // for (let count = 0; count < counterStart; count++) {
+  //   overlay.insertAdjacentHTML(`<div>${counterStart}</div>`);
+  // }
 
+  let temp = 0;
   const startTimer = setInterval(function () {
     counterStart--;
     counter.textContent = counterStart;
+    slides(temp);
+    console.log(`slide: ${temp}`);
+    temp++;
 
     if (counterStart < 1) {
       clearInterval(startTimer);
@@ -164,12 +168,11 @@ const init = function () {
   playBtn.addEventListener("click", startGame);
 };
 
-const slides = function () {
-  overlayTimer.forEach(
-    (ot, i) => (ot.style.transform = `translateX("${100 * (i - ot)}`)
+const slides = function (slide) {
+  console.log(`slide ${slide}`);
+  overlayTimers.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
   );
 };
-
-slides();
 
 init();
