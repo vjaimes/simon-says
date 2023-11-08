@@ -23,7 +23,7 @@ body {
 }
 
 .overlay {
-  display: block;
+  display: none;
   height: 100vh;
   width: 100vw;
   background-color: rgba(255, 255, 255, 0);
@@ -39,27 +39,30 @@ body {
 .overlay-timer {
   height: 100vh;
   width: 100vw;
-  display: block;
+  display: none;
+  place-items: center;
+  font-size: calc(48rem / 16);
+  color: white;
   position: absolute;
-  transition: transform 1s;
+  transition: transform 0.5s;
 }
 
 .overlay-timer:nth-child(1) {
   /* width: 100vw; */
   transform: translateX(0);
-  background-color: rgb(255, 228, 196);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .overlay-timer:nth-child(2) {
   /* width: 100vw; */
   transform: translateX(100%);
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .overlay-timer:nth-child(3) {
   /* width: 100vw; */
   transform: translateX(200%);
-  background-color: blue;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .overlay.overlay-game--msg {

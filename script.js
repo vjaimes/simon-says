@@ -1,13 +1,12 @@
 "use strict";
 //global vars
-const counter = document.querySelector(".counter");
 const squares = Array.from(document.querySelectorAll(".square-size"));
 const overlayTimers = document.querySelectorAll(".overlay-timer");
 const playBtn = document.querySelector(".play-btn");
 const overlay = document.querySelector(".overlay");
 
 let gameStart = false;
-let counterStart = 3;
+let counterStart = 4;
 let simonsSelections = [];
 
 const overlayEditor = function (message) {
@@ -20,26 +19,18 @@ const overlayEditor = function (message) {
 // game start count down
 const gameCountdownStart = function () {
   overlay.style.display = "block";
-  counter.style.display = "block";
-  const text = ``;
-  counter.textContent = counterStart;
-
-  // for (let count = 0; count < counterStart; count++) {
-  //   overlay.insertAdjacentHTML(`<div>${counterStart}</div>`);
-  // }
+  overlayTimers.forEach((s) => (s.style.display = "grid"));
 
   let temp = 0;
   const startTimer = setInterval(function () {
     counterStart--;
-    counter.textContent = counterStart;
-    slides(temp);
-    console.log(`slide: ${temp}`);
+    slides(temp, counterStart);
     temp++;
 
     if (counterStart < 1) {
       clearInterval(startTimer);
-      counter.style.display = "none";
       simonSays(simonsSelections);
+      overlayTimers.forEach((s) => (s.style.display = "none"));
     }
   }, 1000);
 };
@@ -168,11 +159,12 @@ const init = function () {
   playBtn.addEventListener("click", startGame);
 };
 
-const slides = function (slide) {
+const slides = function (slide, count) {
   console.log(`slide ${slide}`);
-  overlayTimers.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
-  );
+  overlayTimers.forEach((s, i) => {
+    s.textContent = count;
+    s.style.transform = `translateX(${100 * (i - slide)}%)`;
+  });
 };
 
 init();
