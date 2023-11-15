@@ -1,5 +1,7 @@
+import * as model from "./Model.js";
+
 const init = function () {
-  playBtn.addEventListener("click", startGame);
+  model.playBtn.addEventListener("click", model.startGame);
 };
 
 init();

@@ -2,25 +2,34 @@
 
 export let simonsSelections = [];
 //global vars
-const squares = Array.from(document.querySelectorAll(".square-size"));
-const overlayTimers = document.querySelectorAll(".overlay-timer");
-const playBtn = document.querySelector(".play-btn");
-const overlay = document.querySelector(".overlay");
+export const squares = Array.from(document.querySelectorAll(".square-size"));
+export const overlayTimers = document.querySelectorAll(".overlay-timer");
+export const playBtn = document.querySelector(".play-btn");
+export const overlay = document.querySelector(".overlay");
 
-const startGame = function () {
+// random number generator for simon's color selections
+const RNG = function (max) {
+  for (let i = 0; i < max; i++) {
+    const randomNum = Math.floor(Math.random() * max);
+    simonsSelections.push(randomNum + 1);
+  }
+};
+
+let gameStart = false;
+export const startGame = function () {
   gameStart = true;
   RNG(4);
   gameCountdownStart();
 };
 
-const gameOver = function () {
+export const gameOver = function () {
   if (!gameStart) return;
   gameStart = false;
   overlayEditor("Game Over!!!");
   squares.forEach((s) => (s.style.pointerEvents = "none"));
 };
 
-const gameWon = function () {
+export const gameWon = function () {
   if (!gameStart) return;
   gameStart = false;
   overlayEditor("You Win!!!");
@@ -34,7 +43,7 @@ const highlightTiming = {
 };
 
 // function that highlights square based on simons squares
-const highlightColor = function (target) {
+export const highlightColor = function (target) {
   const data = target.dataset.order;
 
   switch (+data) {
