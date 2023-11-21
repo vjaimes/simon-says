@@ -1,10 +1,14 @@
 ("use strict");
 
+// Model.js holds application data and runs the "business" part of the code
+// in this case. simons selections and how he selects his colors
+
 export let simonsSelections = [];
+export let gameStart = false;
+
 //global vars
 export const squares = Array.from(document.querySelectorAll(".square-size"));
 export const overlayTimers = document.querySelectorAll(".overlay-timer");
-export const playBtn = document.querySelector(".play-btn");
 export const overlay = document.querySelector(".overlay");
 
 // random number generator for simon's color selections
@@ -15,7 +19,6 @@ const RNG = function (max) {
   }
 };
 
-let gameStart = false;
 export const startGame = function () {
   gameStart = true;
   RNG(4);

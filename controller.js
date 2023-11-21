@@ -1,8 +1,13 @@
 import * as model from "./Model.js";
-import * as view from "./View.js";
+import * as view from "./view.js";
+
+const startGame = function () {
+  view.playBtnDetector();
+  model.gameStart = true;
+};
 
 const init = function () {
-  model.playBtn.addEventListener("click", model.startGame);
+  startGame();
 };
 
 init();
