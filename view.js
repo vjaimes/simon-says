@@ -59,7 +59,7 @@ const overlayEditor = function (message) {
 };
 
 // game start count down
-const gameCountdownStart = function () {
+export const gameCountdownStart = function () {
   overlay.style.display = "block";
   overlayTimers.forEach((s) => (s.style.display = "grid"));
 
