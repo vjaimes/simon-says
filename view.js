@@ -4,6 +4,10 @@
 const overlay = document.querySelector(".overlay");
 const overlayTimers = document.querySelectorAll(".overlay-timer");
 const playBtn = document.querySelector(".play-btn");
+const coloredSquares = Array.from(document.querySelectorAll(".square-size"));
+
+export let gameStart = false;
+export const simonsSelections = [];
 
 // slide overlay to next countdown number,
 const countSlides = function (slide, count) {
@@ -28,15 +32,53 @@ const gameCountdownStart = function () {
 
     if (counterStart < 1) {
       clearInterval(startTimer);
+      console.log(simonsSelections);
       simonSays(simonsSelections);
       overlayTimers.forEach((s) => (s.style.display = "none"));
     }
   }, 1000);
 };
 
-// waits for user to hit play button, exported to controllers init function
-export const playBtnDetector = function () {
-  playBtn.addEventListener("click", gameCountdownStart);
+// function that highlights square based on simons squares
+export const highlightColor = function (target) {
+  const data = target.dataset.order;
+
+  switch (+data) {
+    case 1:
+      const highlightSquareRed = [
+        { backgroundColor: "rgb(255, 0, 0)" },
+        { backgroundColor: "rgba(255, 0, 0, 0.5)" },
+      ];
+
+      target.animate(highlightSquareRed, highlightTiming);
+      break;
+    case 2:
+      const highlightSquareBlue = [
+        { backgroundColor: "rgb(0, 0, 255)" },
+        { backgroundColor: "rgba(0, 0, 255, 0.5)" },
+      ];
+
+      target.animate(highlightSquareBlue, highlightTiming);
+      break;
+    case 3:
+      const highlightSquareGreen = [
+        { backgroundColor: "rgb(0, 128, 0)" },
+        { backgroundColor: "rgba(0, 128, 0, 0.5)" },
+      ];
+
+      target.animate(highlightSquareGreen, highlightTiming);
+      break;
+    case 4:
+      const highlightSquareYellow = [
+        { backgroundColor: "rgb(255, 255, 0)" },
+        { backgroundColor: "rgba(255, 255, 0, 0.5)" },
+      ];
+
+      target.animate(highlightSquareYellow, highlightTiming);
+      break;
+    default:
+      return;
+  }
 };
 
 //compares player selection against simons selections
@@ -58,14 +100,14 @@ document.addEventListener("click", function (e) {
 
 // display selected colors
 const simonSays = function (simonsSelections) {
-  //how we know that there are no more squares left for simon to select
+  //how we know that there are no more coloredSquares left for simon to select
   let selectionCounter = simonsSelections.length;
   //keeps track of which square to highlight next
   let currSquare = 0;
 
   playBtn.style.display = "none";
   const timer = setInterval(() => {
-    const selection = squares.find(
+    const selection = coloredSquares.find(
       (square) => +square.dataset.order === simonsSelections[currSquare]
     );
 
@@ -90,5 +132,8 @@ const overlayEditor = function (message) {
   overlay.insertAdjacentHTML("beforeend", text);
 };
 
-// game start count down
-// function: set overlay for start timer to display
+// waits for user to hit play button, exported to controllers init function
+export const playBtnDetector = function () {
+  playBtn.addEventListener("click", gameCountdownStart);
+  gameStart = true;
+};
