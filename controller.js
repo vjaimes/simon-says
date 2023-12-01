@@ -2,20 +2,17 @@ import * as model from "./Model.js";
 import * as view from "./view.js";
 
 const transferSimonsSelections = function () {
-  view.simonsSelections = model.randomSelectionResults.map((num) => num);
+  view.simonsSelections = model.randomSelectionResults.slice();
 };
 
-const startGame = function () {
-  view.playBtnDetector();
-  if (view.gameStart) {
-    console.log("game start");
-    model.startGame();
-    transferSimonsSelections();
-  }
+const InitModel = function () {
+  console.log("control starting model");
+  // model.startGame();
+  // transferSimonsSelections();
 };
 
 const init = function () {
-  startGame();
+  view.playEvent(InitModel);
 };
 
 init();

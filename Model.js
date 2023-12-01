@@ -15,9 +15,12 @@ const RNG = function (max) {
     const randomNum = Math.floor(Math.random() * max);
     randomSelectionResults.push(randomNum + 1);
   }
+
+  randomSelectionResults.forEach((e) => console.log("arr: ", e));
 };
 
 export const startGame = function () {
+  console.log("model started");
   gameStatus = true;
   RNG(4);
 };

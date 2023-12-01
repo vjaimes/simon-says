@@ -20,7 +20,7 @@ const countSlides = function (slide, count) {
 
 // displays countdown too gamestart with screen overlays
 let counterStart = 4;
-const gameCountdownStart = function () {
+const gameCountdownStart = function (functionEvent) {
   overlay.style.display = "block";
   overlayTimers.forEach((s) => (s.style.display = "grid"));
 
@@ -32,15 +32,17 @@ const gameCountdownStart = function () {
 
     if (counterStart < 1) {
       clearInterval(startTimer);
-      console.log(simonsSelections);
-      simonSays(simonsSelections);
+      // console.log("selections", simonsSelections);
+      // simonSays(simonsSelections);
       overlayTimers.forEach((s) => (s.style.display = "none"));
+      functionEvent();
     }
   }, 1000);
 };
 
 // function that highlights square based on simons squares
 export const highlightColor = function (target) {
+  simonsSelections.forEach((e) => console.log("element", e));
   const data = target.dataset.order;
 
   switch (+data) {
@@ -133,7 +135,8 @@ const overlayEditor = function (message) {
 };
 
 // waits for user to hit play button, exported to controllers init function
-export const playBtnDetector = function () {
-  playBtn.addEventListener("click", gameCountdownStart);
-  gameStart = true;
+export const playEvent = function (functionEvent) {
+  playBtn.addEventListener("click", () => {
+    gameCountdownStart();
+  });
 };
