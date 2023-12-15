@@ -4,10 +4,11 @@
 const overlay = document.querySelector(".overlay");
 const overlayTimers = document.querySelectorAll(".overlay-timer");
 const playBtn = document.querySelector(".play-btn");
-const coloredSquares = Array.from(document.querySelectorAll(".square-size"));
 
+export const coloredSquares = Array.from(
+  document.querySelectorAll(".square-size")
+);
 export let gameStart = false;
-export const simonsSelections = [];
 
 // slide overlay to next countdown number,
 const countSlides = function (slide, count) {
@@ -20,7 +21,7 @@ const countSlides = function (slide, count) {
 
 // displays countdown too gamestart with screen overlays
 let counterStart = 4;
-const gameCountdownStart = function (functionEvent) {
+export const gameCountdownStart = function (functionEvent) {
   overlay.style.display = "block";
   overlayTimers.forEach((s) => (s.style.display = "grid"));
 
@@ -32,17 +33,21 @@ const gameCountdownStart = function (functionEvent) {
 
     if (counterStart < 1) {
       clearInterval(startTimer);
-      // console.log("selections", simonsSelections);
-      // simonSays(simonsSelections);
       overlayTimers.forEach((s) => (s.style.display = "none"));
       functionEvent();
     }
   }, 1000);
 };
 
+// timer for square highlight animation
+const highlightTiming = {
+  duration: 750,
+  iterations: 1,
+};
+
 // function that highlights square based on simons squares
 export const highlightColor = function (target) {
-  simonsSelections.forEach((e) => console.log("element", e));
+  console.log(target);
   const data = target.dataset.order;
 
   switch (+data) {
@@ -101,7 +106,7 @@ document.addEventListener("click", function (e) {
 });
 
 // display selected colors
-const simonSays = function (simonsSelections) {
+export const simonSays = function (simonsSelections) {
   //how we know that there are no more coloredSquares left for simon to select
   let selectionCounter = simonsSelections.length;
   //keeps track of which square to highlight next
@@ -137,6 +142,6 @@ const overlayEditor = function (message) {
 // waits for user to hit play button, exported to controllers init function
 export const playEvent = function (functionEvent) {
   playBtn.addEventListener("click", () => {
-    gameCountdownStart();
+    functionEvent();
   });
 };

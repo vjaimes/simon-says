@@ -15,8 +15,6 @@ const RNG = function (max) {
     const randomNum = Math.floor(Math.random() * max);
     randomSelectionResults.push(randomNum + 1);
   }
-
-  randomSelectionResults.forEach((e) => console.log("arr: ", e));
 };
 
 export const startGame = function () {
@@ -37,10 +35,4 @@ export const gameWon = function () {
   gameStatus = false;
   overlayEditor("You Win!!!");
   squares.forEach((s) => (s.style.pointerEvents = "none"));
-};
-
-// timer for square highlight animation
-const highlightTiming = {
-  duration: 750,
-  iterations: 1,
 };

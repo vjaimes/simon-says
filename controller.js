@@ -1,14 +1,14 @@
 import * as model from "./Model.js";
 import * as view from "./view.js";
 
-const transferSimonsSelections = function () {
-  view.simonsSelections = model.randomSelectionResults.slice();
+const sendSelection = function () {
+  view.simonSays(model.randomSelectionResults);
 };
 
 const InitModel = function () {
   console.log("control starting model");
-  // model.startGame();
-  // transferSimonsSelections();
+  model.startGame();
+  view.gameCountdownStart(sendSelection);
 };
 
 const init = function () {
